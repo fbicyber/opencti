@@ -977,22 +977,23 @@ const LeftBar = () => {
                     primary={t_i18n('Settings')}
                   />
                 )}
-                {navOpen && (selectedMenu.includes('settings') ? <ExpandLessOutlined /> : <ExpandMoreOutlined />)}
-              </MenuItem>
-              {generateSubMenu(
-                'settings',
-                [
-                  { granted: isGrantedToParameters, link: '/dashboard/settings', label: 'Parameters', exact: true },
-                  { granted: isGrantedToSecurity || isOrganizationAdmin, link: '/dashboard/settings/accesses', label: 'Security' },
-                  { granted: isGrantedToCustomization, link: '/dashboard/settings/customization', label: 'Customization' },
-                  { granted: isGrantedToTaxonomies, link: '/dashboard/settings/vocabularies', label: 'Taxonomies' },
-                  { granted: isGrantedToAudit, link: '/dashboard/settings/activity', label: 'Activity' },
-                  { granted: isGrantedToFileIndexing, link: '/dashboard/settings/file_indexing', label: 'File indexing' },
-                  { granted: isGrantedToSupport, link: '/dashboard/settings/support', label: 'Support' },
-                ],
-              )}
-            </MenuList>
-          )}
+              {navOpen && (selectedMenu.includes('settings') ? <ExpandLessOutlined /> : <ExpandMoreOutlined />)}
+            </MenuItem>
+            {generateSubMenu(
+              'settings',
+              [
+                { granted: isGrantedToParameters, link: '/dashboard/settings', label: 'Parameters', exact: true },
+                { granted: isGrantedToSecurity || isOrganizationAdmin, link: '/dashboard/settings/accesses', label: 'Security' },
+                { granted: isGrantedToCustomization, link: '/dashboard/settings/customization', label: 'Customization' },
+                { granted: isGrantedToTaxonomies, link: '/dashboard/settings/vocabularies', label: 'Taxonomies' },
+                { granted: isGrantedToAudit, link: '/dashboard/settings/activity', label: 'Activity' },
+                { granted: isGrantedToFileIndexing, link: '/dashboard/settings/file_indexing', label: 'File indexing' },
+                { granted: isGrantedToSupport, link: '/dashboard/settings/support', label: 'Support' },
+                { granted: isGrantedToAudit, link: '/dashboard/settings/metrics', label: 'Metrics' }, // TODO: permissions granted ?
+
+              ],
+            )}
+          </MenuList>
         </Security>
       </div>
       <div style={{ marginTop: 'auto' }}>

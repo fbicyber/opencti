@@ -10,7 +10,7 @@ import useGranted, {
   SETTINGS_SECURITYACTIVITY,
   SETTINGS_FILEINDEXING,
   SETTINGS_SUPPORT,
-  SETTINGS_SETPARAMETERS,
+  SETTINGS_SETPARAMETERS
 } from '../../../utils/hooks/useGranted';
 import Loader from '../../../components/Loader';
 
@@ -42,6 +42,7 @@ const Vocabularies = lazy(() => import('./Vocabularies'));
 const VocabularyCategories = lazy(() => import('./VocabularyCategories'));
 const Audit = lazy(() => import('./activity/audit/Root'));
 const Configuration = lazy(() => import('./activity/configuration/Configuration'));
+const Metrics = lazy(() => import ('./metrics/Metrics'))
 const Alerting = lazy(() => import('./activity/alerting/Alerting'));
 const DecayRules = lazy(() => import('./decay/DecayRules'));
 const DecayRule = lazy(() => import('./decay/DecayRule'));
@@ -230,6 +231,14 @@ const Root = () => {
               <Security needs={[SETTINGS_SECURITYACTIVITY]} placeholder={<Navigate to={urlWithCapabilities()} />}>
                 <Navigate to="/dashboard/settings/activity/audit" replace={true} />
               </Security>
+            }
+          />
+          <Route
+            path="/metrics"
+            element={
+              // <Security needs={[SETTINGS_SECURITYACTIVITY]} placeholder={<Navigate to={urlWithCapabilities()} />}>
+                <Metrics />
+              // </Security>
             }
           />
           <Route
