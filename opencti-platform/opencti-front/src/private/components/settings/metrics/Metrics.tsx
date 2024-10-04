@@ -21,7 +21,7 @@ import Paper from '@mui/material/Paper';
 import Breadcrumbs from '../../../../components/Breadcrumbs';
 import ActivityMenu from '../ActivityMenu';
 import EnterpriseEdition from '@components/common/entreprise_edition/EnterpriseEdition';
-import AuditsMultiVerticalBars from '@components/common/audits/AuditsMultiVerticalBars';
+import AuditsMultiLineChart from '@components/common/audits/AuditsMultiLineChart';
 import { useFormatter } from '../../../../components/i18n';
 import useEnterpriseEdition from '../../../../utils/hooks/useEnterpriseEdition';
 import { SETTINGS_SECURITYACTIVITY } from '../../../../utils/hooks/useGranted';
@@ -64,7 +64,7 @@ const MetricsComponent: FunctionComponent<MetricsProps> = ({ data }) => {
   }
   return (
     <Security needs={[SETTINGS_SECURITYACTIVITY]} placeholder={<span>{t_i18n(
-        'You do not have any access to the audit activity of this OpenCTI instance.',
+        'You do not have any access to the platform metrics of this OpenCTI instance.',
       )}</span>}
       >
         <div className={classes.container}>
@@ -80,7 +80,7 @@ const MetricsComponent: FunctionComponent<MetricsProps> = ({ data }) => {
                 <Grid item xs={6}>
                     <Paper classes={{ root: classes.paper }} variant="outlined">
 
-                        <AuditsMultiVerticalBars
+                        <AuditsMultiLineChart
                             height={300}
                             parameters={{
                             title: t_i18n('Logins to the platform'),
@@ -93,7 +93,7 @@ const MetricsComponent: FunctionComponent<MetricsProps> = ({ data }) => {
                                 filters: [
                                     {
                                     key: 'members_user',
-                                    values: ["88ec0c6a-13ce-5e39-b486-354fe4a7084f"], // hard-coded admin id for my local instance
+                                    values: ["88ec0c6a-13ce-5e39-b486-354fe4a7084f", "2be77d63-0137-4e6e-9664-5281463e226b"], // hard-coded admin & test-user ids for my local instance
                                     },
                                     {
                                     key: 'event_scope',
