@@ -340,7 +340,7 @@ export const verticalBarsChartOptions = (
   yaxis: {
     labels: {
       formatter: (value) => (yFormatter ? yFormatter(value) : value),
-      align: "bottom",
+      align: 'bottom',
       // maxWidth: "80px",
       // offsetY: "-20px",
       style: {
