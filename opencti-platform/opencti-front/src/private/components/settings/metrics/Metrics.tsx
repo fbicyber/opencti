@@ -26,6 +26,7 @@ import { useFormatter } from '../../../../components/i18n';
 import useEnterpriseEdition from '../../../../utils/hooks/useEnterpriseEdition';
 import { SETTINGS_SECURITYACTIVITY } from '../../../../utils/hooks/useGranted';
 import Security from '../../../../utils/Security'
+import { monthsAgo } from '../../../../utils/Time';
 import useQueryLoading from '../../../../utils/hooks/useQueryLoading';
 import Loader, { LoaderVariant } from '../../../../components/Loader';
 
@@ -84,6 +85,7 @@ const MetricsComponent: FunctionComponent<MetricsProps> = ({ data }) => {
                             height={300}
                             parameters={{
                             title: t_i18n('Logins to the platform'),
+                            startDate: monthsAgo(1),
                             }}
                             dataSelection={[
                             {
