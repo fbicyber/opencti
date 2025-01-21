@@ -29,6 +29,8 @@ import { simpleNumberFormat } from '../../../../utils/Number';
 import useGranted, { SETTINGS_SECURITYACTIVITY, SETTINGS_SETACCESSES, VIRTUAL_ORGANIZATION_ADMIN } from '../../../../utils/hooks/useGranted';
 import useEnterpriseEdition from '../../../../utils/hooks/useEnterpriseEdition';
 import useDistributionGraphData from '../../../../utils/hooks/useDistributionGraphData';
+import { monthsAgo, now } from '../../../../utils/Time'; // added for metrics page work
+
 
 // Deprecated - https://mui.com/system/styles/basics/
 // Do not use it for new code.
@@ -149,12 +151,15 @@ const AuditsHorizontalBars = ({
           types: ['History', 'Activity'],
           field: selection.attribute,
           operation: 'count',
-          startDate,
-          endDate,
+          // startDate, 
+          // endDate,
+          startDate: startDate ?? monthsAgo(12), // added for metrics page work
+          endDate: endDate ?? now(), // added for metrics page work
           dateAttribute:
-            selection.date_attribute && selection.date_attribute.length > 0
-              ? selection.date_attribute
-              : 'timestamp',
+            // selection.date_attribute && selection.date_attribute.length > 0
+            //   ? selection.date_attribute
+            "created_at" ?? 'timestamp', // added for metrics page work
+              // : 'timestamp',
           filters: selection.filters,
           limit: selection.number ?? 10,
         }}

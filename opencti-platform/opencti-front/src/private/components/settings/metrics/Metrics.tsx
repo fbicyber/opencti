@@ -16,7 +16,9 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 import React, { FunctionComponent } from 'react';
 import Grid from '@mui/material/Grid';
 import EnterpriseEdition from '@components/common/entreprise_edition/EnterpriseEdition';
+import { graphql, useFragment } from 'react-relay';
 import AuditsMultiLineChart from '@components/common/audits/AuditsMultiLineChart';
+import AuditsHorizontalBars from '@components/common/audits/AuditsHorizontalBars';
 import Breadcrumbs from '../../../../components/Breadcrumbs';
 import ActivityMenu from '../ActivityMenu';
 import { useFormatter } from '../../../../components/i18n';
@@ -26,9 +28,14 @@ import Security from '../../../../utils/Security';
 import { monthsAgo } from '../../../../utils/Time';
 import Loader, { LoaderVariant } from '../../../../components/Loader';
 
+
+
 const MetricsComponent: FunctionComponent = () => {
   const { t_i18n } = useFormatter();
   const isEnterpriseEdition = useEnterpriseEdition();
+
+
+  
   if (!isEnterpriseEdition) {
     return <EnterpriseEdition feature={'User activity'} />;
   }
@@ -48,6 +55,8 @@ const MetricsComponent: FunctionComponent = () => {
           <Grid item xs={6}>
             <AuditsMultiLineChart
               height={300}
+              // startDate={monthsAgo(1)} // need to convert AuditsMultiLineChart from .jsx to .tsx component in order to pass prop..? 
+                                          // currently getting "cannot assign string to type 'null | undefined'"
               parameters={{
                 title: t_i18n('Logins to the platform'),
                 startDate: monthsAgo(1),
@@ -70,6 +79,56 @@ const MetricsComponent: FunctionComponent = () => {
                     filterGroups: [],
                   },
                 },
+              ]}
+            />
+            
+          </Grid>
+          <Grid item xs={6}>
+            <AuditsHorizontalBars
+              height={300}
+              parameters={{
+                title: 'Last 12 months of logins by user',
+                startDate: monthsAgo(1),
+              }}
+              dataSelection={[
+                {
+                  attribute: 'user_id',
+                  date_attribute: 'created',
+                  filters: {
+                    mode: 'and',
+                    filters: [
+                      {
+                        key: 'members_user',
+                        values: ['88ec0c6a-13ce-5e39-b486-354fe4a7084f', '2c821418-98f1-4194-bd63-592a0d9a3500'], // hard-coded 
+                      },
+                      {
+                        key: 'event_scope',
+                        values: ['login'],
+                      },
+                    ],
+                    filterGroups: [],
+                  },
+                  number: 20,
+                },                
+                // {
+                //   attribute: 'context_data.id',
+                //   date_attribute: 'created',
+                //   filters: {
+                //     mode: 'and',
+                //     filters: [
+                //       {
+                //         key: 'members_user',
+                //         values: ['2c821418-98f1-4194-bd63-592a0d9a3500'], // hard-coded to test user
+                //       },
+                //       {
+                //         key: 'event_scope',
+                //         values: ['login'],
+                //       },
+                //     ],
+                //     filterGroups: [],
+                //   },
+                //   number: 20,
+                // },
               ]}
             />
           </Grid>
